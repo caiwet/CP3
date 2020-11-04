@@ -36,9 +36,8 @@
    */
   function fillJoke(response) {
     let card = id("joke-card");
-    let prev = document.getElementById("joke");
-    if (prev !== null) {
-      card.removeChild(prev);
+    if (card.hasChildNodes()) {
+      card.removeChild(card.firstChild);
     }
     let joke = gen("p");
     let content = response.value.joke;
@@ -51,9 +50,12 @@
    * Show an error message if error occured when fetching data
    */
   function handleError() {
-    let msg = gen("aside");
-    msg.textContent = "Oops..we lose it. Please try again later.";
     let card = id("joke-card");
+    let msg = gen("aside");
+    if (card.hasChildNodes()) {
+      card.removeChild(card.firstChild);
+    }
+    msg.textContent = "Oops..we lose it. Please try again later.";
     card.appendChild(msg);
   }
 
